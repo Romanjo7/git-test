@@ -1,0 +1,762 @@
+@import './restyle.css';
+@import './vars.scss';
+
+@keyframes slider_next-move {
+  from {
+    transform: translateX(-10%);
+  }
+
+  50% {
+    transform: translateX(10%);
+  }
+
+  to {
+    transform: translateX(-10%);
+  }
+}
+
+*::selection {
+  background: $selection
+}
+
+html,
+body {
+  background-color: $appbg;
+  font-family: 'Inter', sans-serif;
+  height: 100%;
+
+  &.module-active {
+    overflow-y: hidden;
+  }
+}
+
+#root,
+.App {
+  height: 100%;
+}
+
+.App {
+  padding: 60px 20px 0 20px;
+}
+
+.container {
+  min-height: 100%;
+  max-width: 1080px;
+  width: 100%;
+  background: $containerBg;
+  margin: 0 auto;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  padding: 0 60px 25px 60px;
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+}
+
+*.--justify-start {
+  justify-content: start !important;
+}
+
+/* sneakersState */
+
+.sneakersState_header {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.sneakersState_title {
+  max-height: 32px;
+  color: $mainAppFontColor;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+/* buttons */
+
+.main_btn {
+  max-width: 245px;
+  width: 100%;
+  height: 55px;
+  background: $mainBtnBg;
+  border-radius: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.15s ease-in;
+
+  &:hover {
+    background: $mainBtnBg-hover;
+  }
+
+  .main_btn_text {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+  }
+
+  .main_btn_arrow {
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.15s ease-in;
+  }
+}
+
+.goBackBtn {
+  &:hover .goBackBtn_arrow {
+    transform: translateX(-24px) rotate(180deg);
+  }
+
+  .goBackBtn_arrow {
+    transform: translateX(-20px) rotate(180deg);
+  }
+}
+
+.returnBtn {
+  cursor: pointer;
+
+  rect {
+    transition: stroke 0.15s ease-in-out;
+  }
+
+  path {
+    transition: stroke 0.15s ease-in-out;
+  }
+
+  &:hover {
+    rect {
+      stroke: #c4c4c4;
+    }
+
+    path {
+      stroke: #a5a5a5;
+    }
+  }
+}
+
+
+.cart_orderBtn {
+  max-width: 325px;
+  margin-top: 24px;
+
+  &:hover .cart_orderBtn_arrow {
+    transform: translateX(54px);
+  }
+
+  &:disabled{
+    opacity: 0.8;
+  }
+
+  .cart_orderBtn_arrow {
+    transform: translateX(50px) rotate(0deg);
+  }
+}
+
+/* cart */
+
+.overlay {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $overlay;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+
+  .cart {
+    width: 385px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    background: $containerBg;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+
+    .cart_title {
+      color: $mainAppFontColor;
+      font-size: 24px;
+      font-weight: 700;
+      align-self: flex-start;
+    }
+
+    .cart_content {
+      height: 97%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .cart_items {
+        flex: 1;
+        margin-top: 30px;
+        padding-right: 10px;
+        overflow-y: auto;
+
+        .cart_item {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 15px;
+          border-radius: 20px;
+          border: 1px solid $border;
+          padding: 20px;
+          margin-bottom: 20px;
+          transition: box-shadow 0.15s ease-in;
+
+          &:hover {
+            box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.08);
+          }
+
+          img {
+            object-fit: contain;
+            margin-bottom: 10px;
+          }
+
+          .cart_item_text {
+            max-width: 150px;
+
+            .cart_item_title {
+              color: $mainAppFontColor;
+              line-height: 16.94px;
+            }
+
+            .cart_item_price {
+              margin-top: 8px;
+              color: $mainAppFontColor;
+              font-weight: 700;
+            }
+          }
+
+          .cart_item_deleteBtn {
+            width: 32px;
+            height: 32px;
+            background: none;
+
+            svg path {
+              transition: fill 0.2s ease-in-out;
+            }
+
+            svg rect {
+              transition: stroke 0.2s ease-in-out;
+            }
+
+            &:hover {
+              svg path {
+                fill: $deleteBtnBorder-hover;
+              }
+
+              svg rect {
+                stroke: $deleteBtnBorder-hover;
+              }
+            }
+          }
+        }
+      }
+
+      .cart_price {
+        width: 100%;
+        margin-top: 21px;
+
+        .cart_price_result,
+        .cart_price_tax {
+          display: flex;
+
+          .cart_price_title {
+            color: $mainAppFontColor;
+            font-size: 16px;
+          }
+
+          .cart_price_text {
+            color: $mainAppFontColor;
+            font-size: 16px;
+            font-weight: 600;
+          }
+        }
+
+        .cart_price_tax {
+          margin-top: 20px;
+        }
+
+        .dash {
+          border-bottom: 1px dashed #DFDFDF;
+          flex: 1;
+        }
+      }
+
+      .cartMessage_title {
+        color: $mainAppFontColor;
+        font-size: 22px;
+        font-weight: 600;
+        margin-top: 21px;
+
+        &-green {
+          color: $cartMessageTitle-green;
+        }
+      }
+
+      .cartMessage_text {
+        max-width: 285px;
+        color: $mainAppFontColor;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        /* 150% */
+        opacity: 0.4;
+        margin: 10px 0 40px 0;
+      }
+    }
+  }
+}
+
+// header
+
+.app_header {
+  padding: 43px 0;
+  border-bottom: 1px solid $headerUnderline;
+
+  .app_header_wrapper {
+    padding: 0 60px;
+  }
+
+  .app_header_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+
+    .logo_section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+
+      .logo {
+        height: max-content;
+        display: block;
+      }
+
+      .logo_title {
+        color: $mainAppFontColor;
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .logo_subtitle {
+        color: $logoSubTitle;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+
+    .app_header_links {
+      display: flex;
+      gap: 32px;
+
+      &_cart {
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      &_cart,
+      &_favorites,
+      &_purchases {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: $secondaryAppFontColor;
+        transition: color 0.15s ease-in;
+
+        .cart_logo path {
+          transition: stroke 0.15s ease-in;
+        }
+
+        .heart_logo path {
+          transition: fill 0.15s ease-in;
+        }
+
+        .user_logo path {
+          transition: fill 0.15s ease-in;
+        }
+      }
+
+      &_cart:hover,
+      &_favorites:hover,
+      &_purchases:hover {
+        color: $secondaryAppFontColor-hover;
+
+        .cart_logo path {
+          stroke: $secondaryAppFontColor-hover;
+        }
+
+        .heart_logo path {
+          fill: $secondaryAppFontColor-hover;
+        }
+
+        .user_logo path {
+          fill: $secondaryAppFontColor-hover;
+        }
+      }
+    }
+  }
+}
+
+/* main */
+
+.app_main {
+  padding-top: 45px;
+  flex: 1 1;
+  display: flex;
+  flex-direction: column;
+
+  &_container {
+    max-width: 960px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+
+    /*  slider */
+
+    .slider {
+      width: 100%;
+      position: relative;
+      display: flex;
+      background: $sliderContainerBg;
+      border-radius: 20px;
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+      .slider_content {
+        max-width: 330px;
+        width: 100%;
+        padding: 16px 20px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .slider_logo {
+          align-self: self-start;
+        }
+
+        .slider_content_wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 32px 0 0 41px;
+        }
+
+        .slider_title {
+          color: $sliderTitle;
+          font-size: 38px;
+          font-weight: 700;
+          line-height: 45.99px;
+
+          .slider_subtitle {
+            color: $sliderSubTitle;
+          }
+        }
+
+        .slider_btn {
+          max-width: 178px;
+          width: 100%;
+          align-self: self-start;
+          background: $sliderBtnBg;
+          color: $sliderBtnText;
+          padding: 14px 20px;
+          margin-top: 24px;
+          border-radius: 110px;
+          font-size: 16px;
+          font-weight: 700;
+          text-transform: uppercase;
+          transition: background 0.2s ease-in-out;
+        }
+
+        .slider_btn:hover {
+          background: $sliderBtnBg-hover;
+        }
+      }
+
+      .slider_img {
+        border-radius: 0 20px 20px 0;
+        width: 642px;
+      }
+
+      .slider_next {
+        width: 51px;
+        height: 51px;
+        position: absolute;
+        top: calc(50% - 5.5%);
+        left: calc(100% - 3%);
+        cursor: pointer;
+        animation: slider_next-move 2s infinite ease-in-out;
+      }
+    }
+  }
+
+  /*  allSneakers */
+
+  .allSneakers_container {
+    width: 100%;
+    margin-top: 36px;
+
+    .allSneakers_header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .allSneakers_search_container {
+        position: relative;
+
+        svg {
+          position: absolute;
+          top: 15px;
+          left: 18px;
+        }
+
+        .sneakers_search {
+          width: 250px;
+          height: 45px;
+          color: $mainAppFontColor;
+          padding: 15px 18px 15px 47px;
+          border-radius: 10px;
+          border: 1px solid $border;
+          transition: border 0.15s ease-in;
+
+          &::placeholder {
+            color: $searchText;
+          }
+
+          &:focus {
+            border: 1px solid $border-hover;
+          }
+        }
+      }
+    }
+
+    .allSneakersEmpty {
+      font-size: 24px;
+      color: $secondaryEmptyPageColor;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .sneakers_pages {
+      display: flex;
+      justify-content: center;
+      column-gap: 20px;
+      font-weight: 700;
+      margin-top: 25px;
+
+      li {
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.3);
+        }
+
+        &.active {
+          color: $sneakersPage-active;
+
+          &:hover {
+            transform: scale(1);
+          }
+        }
+      }
+    }
+  }
+
+  /* favorites, purchases */
+
+  .favorites,
+  .purchases {
+    padding-top: 36px;
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .purchase:not(:last-child) {
+    padding-bottom: 36px;
+    border-bottom: 1px solid $border;
+  }
+
+  .purchase_title {
+    padding-top: 36px;
+    color: $mainAppFontColor;
+    font-size: 20px;
+    font-weight: 700;
+    font-style: oblique;
+    text-align: center;
+  }
+
+  /* emptyPage */
+
+  .emptyPage {
+    flex: 1 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &_content {
+      max-width: 290px;
+      width: 100%;
+      max-height: 285px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+
+      &_title {
+        color: $mainAppFontColor;
+        text-align: center;
+        font-size: 24px;
+        font-weight: 600;
+        margin-top: 31px;
+      }
+
+      &_text {
+        flex: 1 1;
+        color: $secondaryEmptyPageColor;
+        text-align: center;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 11px 0 30px 0;
+      }
+    }
+  }
+
+  /* sneakers */
+
+  .sneakers {
+    width: 100%;
+    margin-top: 36px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 40px;
+
+
+    .sneaker {
+      max-width: 210px;
+      width: 100%;
+      padding: 27px 27px 31px 27px;
+      border-radius: 40px;
+      border: 1px solid $border;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.15s ease-in;
+
+      &:hover {
+        box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+        transform: translateY(-10px);
+      }
+
+      .favorite_btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 7px;
+        border: 1px solid $border;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        cursor: pointer;
+
+        &.liked {
+          background: $favoriteBtn-liked;
+          border: 1px solid $favoriteBtn-liked;
+        }
+
+        &:not(.liked),
+        svg path {
+          transition: border 0.2s ease-in-out, stroke 0.2s ease-in-out;
+        }
+
+        &:not(.liked):hover {
+          svg path {
+            stroke: $favoriteBtnBorder-hover;
+          }
+
+          border: 1px solid $favoriteBtnBorder-hover;
+        }
+      }
+
+      img {
+        object-fit: contain;
+      }
+
+      .sneaker_title {
+        margin-top: 14px;
+        color: $mainAppFontColor;
+        font-weight: 400;
+        line-height: 16.94px;
+      }
+
+      .sneaker_price {
+        width: 100%;
+        margin-top: 14px;
+        position: relative;
+
+        .sneaker_price_title {
+          color: $priceTitle;
+          font-size: 11px;
+          font-weight: 500;
+          text-transform: uppercase;
+          line-height: 13px;
+        }
+
+        .sneaker_price_value {
+          margin-top: 2px;
+          color: $mainAppFontColor;
+          font-weight: 700;
+          line-height: 17px;
+        }
+
+        .add_btn {
+          width: 32px;
+          height: 32px;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background: none;
+          cursor: pointer;
+
+          svg path {
+            transition: fill 0.2s ease-in-out;
+          }
+
+          svg rect {
+            transition: stroke 0.2s ease-in-out;
+          }
+
+          &:not(.checked):hover {
+            svg path {
+              fill: $addBtnBorder-hover;
+            }
+
+            svg rect {
+              stroke: $addBtnBorder-hover;
+            }
+          }
+        }
+      }
+    }
+  }
+}

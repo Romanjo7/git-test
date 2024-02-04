@@ -1,0 +1,1 @@
+### `D` fails to minify
