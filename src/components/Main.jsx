@@ -24,7 +24,7 @@ export const Main = memo(({
                 <Routes>
                     {/* разница */}
                     <Route
-                        path='/'
+                        path=''
                         element={<AllSneakers
                             sneakers={sneakers}
                             setCart={setCart}
@@ -37,7 +37,7 @@ export const Main = memo(({
                         />}
                     />
                     <Route
-                        path='/favorites'
+                        path='favorites'
                         element={<Favorites
                             setCart={setCart}
                             setFavorites={setFavorites}
@@ -45,10 +45,10 @@ export const Main = memo(({
                         />}
                     />
                     <Route
-                        path='/purchases'
+                        path='purchases'
                         element={<Purchases navigate={navigate} />}
                     />
-                    <Route path="*" element={<Navigate to="/" replace />} />
+                    <Route path="*" element={<Navigate to="" replace />} />
                 </Routes>
             </div>
         </main >
