@@ -16,7 +16,7 @@ export const Header = memo(({ cart, displayCart, totalPrice, setTotalPrice }) =>
         <header className='app_header'>
             <div className="app_header_wrapper">
                 <div className="app_header_content">
-                    <Link to={`${BASE_URL}`} className="logo_section">
+                    <Link to={`${BASE_URL}/`} className="logo_section">
                         <div className='logo'>
                             <img height={40} width={40} className='logo' src="img/logo.png" alt="Logo" />
                         </div>

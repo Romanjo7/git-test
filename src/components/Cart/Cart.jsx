@@ -40,8 +40,8 @@ export const Cart = memo(({
                         ? <CartSecondaryStates
                             content={{
                                 img: `${isEmptyBlock
-                                    ? '../img/empty-cart.jpg'
-                                    : '../img/complete-order.jpg'}`,
+                                    ? 'img/empty-cart.jpg'
+                                    : 'img/complete-order.jpg'}`,
                                 title: `${isEmptyBlock
                                     ? 'Корзина пустая'
                                     : 'Заказ оформлен!'}`,

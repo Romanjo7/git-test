@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { GoBackButton } from './UI/GoBackButton';
+import { BASE_URL } from '../common/constants';
 
 export const EmptyPage = memo(({ content, navigate }) => {
     return (
@@ -12,7 +13,7 @@ export const EmptyPage = memo(({ content, navigate }) => {
                 <div className="emptyPage_content_text">
                     {content.text}
                 </div>
-                <GoBackButton onClick={() => navigate('/', { replace: true })} />
+                <GoBackButton onClick={() => navigate(`${BASE_URL}/`, { replace: true })} />
             </div>
         </div>
     );

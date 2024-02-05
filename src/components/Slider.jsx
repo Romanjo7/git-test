@@ -1,10 +1,11 @@
 import React, { memo } from 'react';
+import { BASE_URL } from '../common/constants';
 
 export const Slider = memo(() => {
     return (
         <section className="slider">
             <div className="slider_content">
-                <img width={100} height={40} src='../img/slider-logo.png' className="slider_logo" alt='Slider Logo' />
+                <img width={100} height={40} src={`img/slider-logo.png`} className="slider_logo" alt='Slider Logo' />
                 <div className="slider_content_wrapper">
                     <span className="slider_title">
                         Stan Smith
@@ -15,7 +16,7 @@ export const Slider = memo(() => {
                     <button className='slider_btn'>Купить</button>
                 </div>
             </div>
-            <img src="../img/slider1.png" alt="Slider Image" className="slider_img" />
+            <img src={`img/slider1.png`} alt="Slider Image" className="slider_img" />
             <div className="slider_next">
                 <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g filter="url(#filter0_d_60_240)">

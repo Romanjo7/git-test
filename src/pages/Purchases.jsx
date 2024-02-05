@@ -51,7 +51,7 @@ export const Purchases = memo(({ navigate }) => {
                         : <EmptyPage
                             content={
                                 {
-                                    smile: '../img/smiles/sad-1.png',
+                                    smile: 'img/smiles/sad-1.png',
                                     title: 'У вас нет заказов',
                                     text: 'Оформите хотя бы один заказ.'
                                 }

@@ -48,7 +48,7 @@ export const Favorites = memo(({ setFavorites, setCart, navigate }) => {
                         : <EmptyPage
                             content={
                                 {
-                                    smile: '../img/smiles/sad-2.png',
+                                    smile: 'img/smiles/sad-2.png',
                                     title: 'Закладок нет :(',
                                     text: 'Вы ничего не добавляли в закладки'
                                 }
