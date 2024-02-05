@@ -4,6 +4,7 @@ import { Favorites } from '../pages/Favorites';
 import { Slider } from '../components/Slider';
 import { Purchases } from '../pages/Purchases';
 import { AllSneakers } from '../pages/AllSneakers';
+import { BASE_URL } from '../common/constants';
 
 export const Main = memo(({
     sneakers,
@@ -24,7 +25,7 @@ export const Main = memo(({
                 <Routes>
                     {/* разница */}
                     <Route
-                        path=''
+                        path={`${BASE_URL}`}
                         element={<AllSneakers
                             sneakers={sneakers}
                             setCart={setCart}
@@ -37,7 +38,7 @@ export const Main = memo(({
                         />}
                     />
                     <Route
-                        path='favorites'
+                        path={`${BASE_URL}/favorites`}
                         element={<Favorites
                             setCart={setCart}
                             setFavorites={setFavorites}
@@ -45,10 +46,10 @@ export const Main = memo(({
                         />}
                     />
                     <Route
-                        path='purchases'
+                        path={`${BASE_URL}/purchases`}
                         element={<Purchases navigate={navigate} />}
                     />
-                    <Route path="*" element={<Navigate to="" replace />} />
+                    <Route path="*" element={<Navigate to={BASE_URL} replace />} />
                 </Routes>
             </div>
         </main >
