@@ -33,7 +33,7 @@ export const CartFilled = memo(({
             setIsDisabled(false)
             setCart([])
         } catch (e) {
-            console.log('Ошибка при добавлении в корзину' + e.message);
+            console.log('Ошибка при покупке!' + e.message);
         }
     }, [cart])
 

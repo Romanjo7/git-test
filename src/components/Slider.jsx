@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
-import { BASE_URL } from '../common/constants';
+import sliderLogo from '../assets/slider-logo.png';
 
 export const Slider = memo(() => {
     return (
         <section className="slider">
             <div className="slider_content">
-                <img width={100} height={40} src={`img/slider-logo.png`} className="slider_logo" alt='Slider Logo' />
+                <img width={100} height={40} src={sliderLogo} className="slider_logo" alt='Slider Logo' />
                 <div className="slider_content_wrapper">
                     <span className="slider_title">
                         Stan Smith
